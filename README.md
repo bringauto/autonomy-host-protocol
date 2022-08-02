@@ -16,17 +16,17 @@ depend on our cloud implementation.
 # Communication protocol
 
 We use [ProtoBuf] v3 library for message format and serialization/deserialization - protocol specification
-can be found at the [BringAutoDaemon.proto] file.
+can be found at the [CarStateProtocol] and [IndustrialPortalProtocol] files.
 
 Each message must be prefixed with four bytes long (uint32_t data type) header which holds
 information about size  of the ProtoBuf message.
 
-As a transfer layer the TCP/IP is chosen. Daemon listens on localhost network under port 1536.
+As a transfer layer the TCP/IP is chosen for comunication between modules and daemon and mqtt for communication between daemon and fleet management. Daemon listens on localhost network under port 1636 if port was not changed.
 
 **In order to receive data from BAD you must send CarStatus message first. If you do not send CarStatus message
 no data will be sent from BAD to Client!**
 
-detailed description at [BringAuto Autonomy Host Protocol]
+detailed description at [Car State Protocol] and [Industrial Portal Protocol]
 
 ## Protocol messages
 
@@ -57,10 +57,11 @@ Message from BAD to the Client.
 The Autonomy system must receive this message.
 
 - plan route according to received commands,
-- change/drive car state according to commands which it  receives
+- change/drive car state according to commands which it receives
 
 
-
-[BringAutoDaemon.proto]: ./BringAutoDaemon.proto
+[CarStateProtocol]: ./CarStateProtocol.proto
+[IndustrialPortalProtocol]: ./IndustrialPortalProtocol.proto
 [ProtoBuf]: https://developers.google.com/protocol-buffers
-[BringAuto Autonomy Host Protocol]: https://drive.google.com/drive/folders/1-cfU5wgbO1O8DOk4bDOufZ_aqJ0U61nP
+[Car State Protocol]: https://docs.google.com/document/d/1cW5t_ue0wQmp-InI-M2fug6mxXvLrYcfVjTRHR4et_c/edit?usp=sharing
+[Industrial Portal Protocol]: https://docs.google.com/document/d/1sjIE4_c9NrQCpUvlgOwejVMWf6U-QSh_9qobpMqOIRU/edit?usp=sharing
